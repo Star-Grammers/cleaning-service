@@ -1,5 +1,8 @@
+/* eslint-disable no-undef */
+// disabled because Jest installed globally on computer for describe, test, expect which causes elint errors
+
 import React from "react";
-import { render, screen, describe, test, expect } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Home from "./page";
 
 describe("Renders page component correctly", () => {
