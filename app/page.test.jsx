@@ -7,7 +7,7 @@ import Home from "./page";
 describe("Renders page component correctly", () => {
   test("renders reservations", () => {
     render(<Home />);
-    const intro = screen.getByText(/hello world/i);
+    const intro = screen.getByText(/hi/i);
     expect(intro).toBeInTheDocument();
   });
 });
