@@ -1,3 +1,7 @@
+"use client";
+
+import { signIn, signOut } from "next-auth/react";
+
 import Link from "next/link";
 
 export function NavLinks(props) {
@@ -12,13 +16,14 @@ export function NavLinks(props) {
   );
 }
 
-export function AuthLinks({ linkName, routes, className }) {
+export function AuthLinks({ logType, className }) {
   return (
-    <Link
+    <button
+      onClick={() => (logType === "signIn" ? signIn() : signOut())}
+      type="button"
       className={`${className} mr-20 py-2 px-4 rounded-full inline-block text-xs leading-none border text-amber-600 border-amber-600 hover:border-blue-500 hover:text-blue-500 lg:mt-0 uppercase`}
-      href={routes}
     >
-      {linkName}
-    </Link>
+      {logType === "signIn" ? "Sign In" : "Log Out"}
+    </button>
   );
 }
