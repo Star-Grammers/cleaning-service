@@ -1,10 +1,16 @@
-import Image from "next/image";
-import { NavLinks, AuthLinks } from "../NavbarLinks";
+"use client";
 
-export default function UserNavbar({ role, session, children }) {
+import Image from "next/image";
+import { useContext } from "react";
+import { NavLinks, AuthLinks } from "../NavbarLinks";
+import { ProviderContext } from "../../store/Provider";
+
+export default function UserNavbar({ role, children }) {
+  const session = useContext(ProviderContext);
+  console.log("🚀 ~ file: UserNavbar.jsx:10 ~ UserNavbar ~ session:", session);
   return (
     <div>
-      <nav className="flex text-center justify-center flex-wrap bg-white p-6 w-full">
+      <nav className="flex text-center justify-center flex-wrap bg-white p-6 w-full sm:text-center">
         <div className="flex items-center flex-shrink-0 text-black ml-20">
           <Image
             className="h-auto max-w-full"
@@ -38,8 +44,15 @@ export default function UserNavbar({ role, session, children }) {
             {role === "user" && (
               <>
                 <NavLinks linkName="about" routes="/about" />
-                <NavLinks linkName="pricing" routes="/pricing" />
-                <NavLinks linkName="services" routes="/servies" />
+                {!session && (
+                  <NavLinks
+                    className="pointer-events-none"
+                    linkName="pricing"
+                    routes="/pricing"
+                  />
+                )}
+                {session && <NavLinks linkName="pricing" routes="/pricing" />}
+                <NavLinks linkName="services" routes="/services" />
                 <NavLinks linkName="contact" routes="/contact" />
               </>
             )}

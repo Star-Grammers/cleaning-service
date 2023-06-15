@@ -16,6 +16,11 @@ module.exports = {
         primaryGold: "CF881D",
       },
     },
+    // screens: {
+    //   tablet: "740px",
+    //   laptop: "1024px",
+    //   desktop: "2000px",
+    // },
   },
   plugins: [],
 };

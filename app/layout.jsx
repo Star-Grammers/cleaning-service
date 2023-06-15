@@ -4,6 +4,7 @@ import { testAdmin } from "../testAdmin.json";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import UserNavbar from "../components/UI/UserNavbar";
 import Footer from "../components/UI/Footer";
+import Provider from "../store/Provider";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,15 +14,13 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
   const role = testAdmin.includes(session?.user?.email) ? "admin" : "user";
-
   return (
     <html lang="en">
       <body>
-        <UserNavbar role={role} session={session}>
-          {children}
-        </UserNavbar>
-        <p>You are lost</p>
-        <Footer />
+        <Provider session={session} role={role}>
+          <UserNavbar role={role}>{children}</UserNavbar>
+          <Footer />
+        </Provider>
       </body>
     </html>
   );
