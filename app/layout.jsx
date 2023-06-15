@@ -1,15 +1,9 @@
 import "./globals.css";
 import { getServerSession } from "next-auth/next";
-// import { Inter } from "next/font/google";
 import { testAdmin } from "../testAdmin.json";
 import { authOptions } from "./api/auth/[...nextauth]/route";
-// import Provider from "../components/Provider";
-import Navbar from "../components/UI/Navbar";
+import UserNavbar from "../components/UI/UserNavbar";
 import Footer from "../components/UI/Footer";
-// import About from "./about/page";
-
-// const inter = Inter({ subsets: ["latin"] });
-console.log("🚀 ~ file: layout.jsx:5 ~ bbbbbb:", testAdmin);
 
 export const metadata = {
   title: "Create Next App",
@@ -18,26 +12,16 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
-  console.log("🚀 ~ file: layout.jsx:19 ~ RootLayout ~ session:", session);
-  let role = "";
-  if (testAdmin.includes(session?.user?.email)) {
-    // return <p>You are an admin, welcome!</p>;
-    role = "admin";
-    return <div>hello</div>;
-  }
-  role = "user";
+  const role = testAdmin.includes(session?.user?.email) ? "admin" : "user";
 
-  console.log("🚀 ~ file: layout.jsx:28 ~ RootLayout ~ role:", role);
   return (
     <html lang="en">
-      {/* <body className={inter.className}> */}
       <body>
-        {/* <Provider session={session}> */}
-        {/* <Navbar>{children}</Navbar> */}
-        <Navbar session={session}>{children}</Navbar>
-        {/* <About session={session} /> */}
+        <UserNavbar role={role} session={session}>
+          {children}
+        </UserNavbar>
+        <p>You are lost</p>
         <Footer />
-        {/* </Provider> */}
       </body>
     </html>
   );

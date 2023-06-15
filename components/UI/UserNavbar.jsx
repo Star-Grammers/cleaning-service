@@ -1,14 +1,7 @@
 import Image from "next/image";
-// import { getServerSession } from "next-auth/next";
 import { NavLinks, AuthLinks } from "../NavbarLinks";
-// import { authOptions } from "../../app/api/auth/[...nextauth]/route";
 
-export default function Navbar({ session, children }) {
-  // const session = await getServerSession(authOptions);
-  // console.log(
-  //   "🚀 ~ file: Navbar.jsx:5 ~ Navbar ~ session hello kitty:",
-  //   session
-  // );
+export default function UserNavbar({ role, session, children }) {
   return (
     <div>
       <nav className="flex text-center justify-center flex-wrap bg-white p-6 w-full">
@@ -42,10 +35,20 @@ export default function Navbar({ session, children }) {
         <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className="text-xs lg:flex-grow block lg:inline-block lg:mt-0 -scroll-ml-72 text-center">
             <NavLinks linkName="home" routes="/" />
-            <NavLinks linkName="about" routes="/about" />
-            <NavLinks linkName="pricing" routes="/pricing" />
-            <NavLinks linkName="services" routes="/servies" />
-            <NavLinks linkName="contact" routes="/contact" />
+            {role === "user" && (
+              <>
+                <NavLinks linkName="about" routes="/about" />
+                <NavLinks linkName="pricing" routes="/pricing" />
+                <NavLinks linkName="services" routes="/servies" />
+                <NavLinks linkName="contact" routes="/contact" />
+              </>
+            )}
+            {role === "admin" && (
+              <>
+                <NavLinks linkName="clients" routes="/clients" />
+                <NavLinks linkName="Employees Calendar" routes="/pricing" />
+              </>
+            )}
           </div>
           <div>
             {!session && <AuthLinks logType="signIn" />}
