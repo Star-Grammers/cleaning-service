@@ -7,7 +7,6 @@ import { ProviderContext } from "../../store/Provider";
 
 export default function UserNavbar({ role, children }) {
   const session = useContext(ProviderContext);
-  console.log("🚀 ~ file: UserNavbar.jsx:10 ~ UserNavbar ~ session:", session);
   return (
     <div>
       <nav className="flex text-center justify-center flex-wrap bg-white p-6 w-full sm:text-center">
