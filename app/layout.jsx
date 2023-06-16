@@ -1,6 +1,6 @@
 import "./globals.css";
 import { getServerSession } from "next-auth/next";
-import { testAdmin } from "../testAdmin.json";
+import x from "../testAdmin";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import UserNavbar from "../components/UI/UserNavbar";
 import Footer from "../components/UI/Footer";
@@ -13,7 +13,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
-  const role = testAdmin.includes(session?.user?.email) ? "admin" : "user";
+  const role = x.includes(session?.user?.email) ? "admin" : "user";
   return (
     <html lang="en">
       <body>
