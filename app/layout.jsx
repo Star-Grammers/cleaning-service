@@ -13,7 +13,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
-  const role = x.includes(session?.user?.email) ? "admin" : "user";
+  const role = x[0].testAdmin.includes(session?.user?.email) ? "admin" : "user";
   return (
     <html lang="en">
       <body>
