@@ -2,6 +2,9 @@
 
 import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
+import CONSTANTS from "../lib/constants";
+
+const { GOOGLE } = CONSTANTS;
 
 export function NavLinks(props) {
   const { linkName, routes, className } = props;
@@ -18,7 +21,7 @@ export function NavLinks(props) {
 export function AuthLinks({ logType, className }) {
   return (
     <button
-      onClick={() => (logType === "signIn" ? signIn() : signOut())}
+      onClick={() => (logType === "signIn" ? signIn(GOOGLE) : signOut(GOOGLE))}
       type="button"
       className={`${className} mr-20 py-2 px-4 rounded-full inline-block text-xs leading-none border text-amber-600 border-amber-600 hover:border-blue-500 hover:text-blue-500 lg:mt-0 uppercase`}
     >
