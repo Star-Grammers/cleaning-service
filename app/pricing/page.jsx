@@ -1,5 +1,7 @@
 "use client";
 
+import checkout from "../../checkout";
+
 const products = [
   {
     id: 1,
@@ -32,6 +34,16 @@ export default function Pricing() {
               </div>
               <div className="text-center">
                 <button
+                  onClick={() => {
+                    checkout({
+                      lineItems: [
+                        {
+                          price: "price_1NGO5wDptCQNn1lugs6HKNL9",
+                          quantity: 1,
+                        },
+                      ],
+                    });
+                  }}
                   type="button"
                   className="py-2 px-4 text-sm font-medium text-gblack rounded-full border border-amber-600"
                 >
